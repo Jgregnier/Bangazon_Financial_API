@@ -7,13 +7,13 @@ using Bangazon_Financial_API.Data;
 
 namespace Bangazon_Financial_API.Repositories
 {
-    public class ReportRepository : IReportRepository, IDisposable
+    public class ReportRepository : IReportRepository
     {
-        private BangazonWebContext context;
+        private readonly BangazonWebContext context;
 
-        public ReportRepository(BangazonWebContext ctx)
+        public ReportRepository(ReportRepositoryConnection connection)
         {
-            context = ctx;
+            context = connection.AppContext;
         }
 
         public IEnumerable<Report> WeeklyReports()
@@ -112,26 +112,6 @@ namespace Bangazon_Financial_API.Repositories
             }).ToList();
 
             return GroupedReports;
-        }
-
-        private bool disposed = false;
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    context.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

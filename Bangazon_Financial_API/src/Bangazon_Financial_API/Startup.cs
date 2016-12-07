@@ -5,6 +5,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Bangazon_Financial_API.Data;
 using Microsoft.EntityFrameworkCore;
+using Bangazon_Financial_API.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Bangazon_Financial_API
 {
@@ -30,6 +32,8 @@ namespace Bangazon_Financial_API
             string path = System.Environment.GetEnvironmentVariable("NTABangazonWeb_Db_Path");
             var connection = $"Filename={path}";
             services.AddDbContext<BangazonWebContext>(options => options.UseSqlite(connection));
+            services.AddSingleton <ReportRepositoryConnection>();
+            services.AddSingleton<ReportRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

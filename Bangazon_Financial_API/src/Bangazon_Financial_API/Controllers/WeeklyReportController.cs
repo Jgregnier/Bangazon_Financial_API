@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Bangazon_Financial_API.Data;
 using Bangazon_Financial_API.Repositories;
 
 namespace BangazonWeb.Controllers

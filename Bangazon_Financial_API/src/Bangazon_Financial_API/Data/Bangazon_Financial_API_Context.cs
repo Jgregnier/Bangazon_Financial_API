@@ -3,10 +3,6 @@ using Bangazon_Financial_API.Models;
 
 namespace Bangazon_Financial_API.Data
 {
-    //Class Name: BangazonWebContext
-    //Author: Grant Regnier
-    //Purpose of the class: The purpose of this class is to create a context in memory for our Controllers to interact with our Database.
-    //Methods in Class: No Methods but DBSets of Customer, LineItem, Order, PaymentType, Product, ProductType
     public class BangazonWebContext : DbContext
     {
         public BangazonWebContext(DbContextOptions<BangazonWebContext> options)
