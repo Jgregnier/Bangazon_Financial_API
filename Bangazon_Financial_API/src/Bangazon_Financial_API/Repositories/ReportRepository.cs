@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Bangazon_Financial_API.Interfaces;
 using Bangazon_Financial_API.Models;
 using Bangazon_Financial_API.Data;
 
 namespace Bangazon_Financial_API.Repositories
 {
-    public class ReportRepository : IReportRepository
+    public class ReportRepository : IReportRepository, IDisposable
     {
         private BangazonWebContext context;
 
@@ -113,6 +112,26 @@ namespace Bangazon_Financial_API.Repositories
             }).ToList();
 
             return GroupedReports;
+        }
+
+        private bool disposed = false;
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    context.Dispose();
+                }
+            }
+            this.disposed = true;
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }
